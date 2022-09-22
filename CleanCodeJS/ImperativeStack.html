@@ -1,0 +1,21 @@
+<html>
+        <script>
+            let stack = {
+                item : [],
+                top : -1
+            };
+            function push(stack,element)
+            {
+                stack.item[++stack.top] = element;
+            }
+            function pop(stack)
+            {
+                return stack.item[stack.top--];
+            }
+
+            push(stack,10);
+            push(stack,20);
+            stack.top = 4;
+            console.log("Pop ",pop(stack));
+        </script>
+</html>

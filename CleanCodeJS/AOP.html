@@ -1,0 +1,20 @@
+<html>
+        <script src="./aopLog.js">
+
+        </script>
+        <script>
+          let obj = {
+            methodOne : function()
+            {
+                console.log("Method one ");
+            },
+            methodTwo : function()
+            {
+                console.log("Method two ");
+            },
+          };
+          logger(obj);
+          obj.methodOne();
+          obj.methodTwo();
+        </script>
+</html>
