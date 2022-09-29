@@ -12,9 +12,11 @@ public class IncThread extends Thread{
 
 	Data data;
 	Semaphore semaphore;
+	static int id= 0;
 	
 	IncThread(Data data,Semaphore sem)
 	{
+		super("IncThread "+id++);
 		this.data = data;
 		this.semaphore = sem;
 	}
@@ -32,7 +34,7 @@ public class IncThread extends Thread{
 			try {
 				this.semaphore.acquire();
 				this.data.value ++;
-				this.semaphore.release();
+				//this.semaphore.release();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
