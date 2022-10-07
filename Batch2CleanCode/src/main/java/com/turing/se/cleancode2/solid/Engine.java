@@ -1,9 +1,7 @@
 package com.turing.se.cleancode2.solid;
 
-public class Engine {
+abstract class Engine {
 
-	public void start()
-	{
-		System.out.println("Engine start");
-	}
+	abstract void start();
+	
 }
