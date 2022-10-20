@@ -44,5 +44,6 @@ public class FactoryDemoWithClass {
 		Logger logger = factory.getLogger();
 		logger.log("Hello");
 		
+		//java.sql.DriverManager.getConnection(null);
 	}
 }
