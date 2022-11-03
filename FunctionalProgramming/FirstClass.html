@@ -1,0 +1,30 @@
+<html>
+    <script>
+
+      function add(a,b)
+      {
+        return a+b;
+      }
+      //Rule1
+      let f = add;
+      console.log("Add ",f(1,2));
+
+      //Rule 2
+      function getAdd()
+      {
+        return function(a,b)
+        {
+            return a+b;
+        };
+      }
+      let add2 = getAdd();
+      console.log("Add2 ",add2(2,3));
+
+      //Rule 3
+      function log(func,data)
+      {
+        func(data);
+      }
+      log(console.log,"Hello");
+    </script>
+</html>

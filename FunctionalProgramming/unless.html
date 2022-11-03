@@ -1,0 +1,35 @@
+<html>
+    <script>
+
+        const forEach = (array,fn) => {
+            for(let i=0;i<array.length;i++)
+                    fn(array[i]);
+        };
+        const unless = (predicate,fn) => {
+                if(!predicate)
+                    fn();
+        }
+        //number % 2
+
+        forEach([1,2,3,4,5,6,7],(number) => {
+                unless((number % 2), () => {
+                        console.log(number, " is even")
+            }) 
+        });
+
+        const times = (times, fn) => 
+        {
+            for (var i = 0; i < times; i++)
+            {
+                fn(i); 
+            }
+            
+        }
+        function printItem(value)
+        {
+            console.log("Value is ",value);
+
+        }
+        times(5,printItem);
+    </script>
+</html>

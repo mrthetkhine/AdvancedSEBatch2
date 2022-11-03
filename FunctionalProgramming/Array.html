@@ -1,0 +1,35 @@
+<html>
+    <script>
+
+       let arr = [1,2,3,4,5];
+       let arr2 = arr.map(ele=>ele+1);
+       console.log("Arr2 ",arr2);
+
+       let objArr = [
+            {
+                name : "Mg Mg",
+                age : 16,
+                gender: "Male"
+            },
+            {
+                name : "Aung Aung",
+                age : 20,
+                gender: "Male"
+            },
+            {
+                name : "Mg Khin",
+                age : 16,
+                gender: "Male"
+            },
+       ];
+       let names = [];
+       for(let i=0;i< objArr.length;i++)
+       {
+            names.push(objArr[i].name);
+       }
+       console.log("Names ",names);
+       
+       names = objArr.map(obj=>obj.name);
+       console.log("Names ",names);
+    </script>
+</html>

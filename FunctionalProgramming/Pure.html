@@ -1,0 +1,34 @@
+<html>
+    <script>
+      //Impure
+       function hello()
+       {
+        console.log('Hello');
+       }
+       hello();
+       
+       //impure
+       let k = 23;
+       function getK()
+       {
+        return k;
+       }
+       //impure
+       function setK(value)
+       {
+        k = value;
+       }
+       //impure
+       function getData()
+       {
+            k++;
+            return Math.random();
+       }
+       //Pure
+       function getDataPure(rand)
+       {
+        return rand;
+       }
+       console.log("Random ",getDataPure(Math.random)());
+    </script>
+</html>
