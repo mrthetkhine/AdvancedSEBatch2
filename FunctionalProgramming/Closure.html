@@ -1,0 +1,16 @@
+<html>
+    <script>
+
+       function nextId()
+       {
+            let id= 1;
+            return function()
+            {
+                return id++;
+            }
+       }
+       let next = nextId();
+       console.log("Next ",next());
+       console.log("Next ",next());
+    </script>
+</html>

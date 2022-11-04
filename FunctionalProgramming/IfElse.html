@@ -1,0 +1,10 @@
+<html>
+    <script>
+
+       function ifElse(predicate,funA,funB)
+       {
+        return predicate?funA(): funB();
+       }
+       ifElse(4%2==0, ()=>console.log('it is even'), ()=>console.log('It is odd'));
+    </script>
+</html>

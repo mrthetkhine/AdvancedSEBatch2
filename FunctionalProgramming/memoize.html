@@ -1,0 +1,27 @@
+<html>
+    <script>
+        /*
+        lookupTable = {
+            3 : 6,
+        }
+        */
+        const memoized = (fn) => {
+            const lookupTable = {};
+            return (arg) => lookupTable[arg] || (lookupTable[arg] = fn(arg));
+        }
+
+        var factorial = (n) => {
+            console.log("N ",n);
+            let result = 1;
+            for(let i=1;i<= n;i++)
+            {
+                result *= i;
+            }
+            return result;
+        };
+        factorial = memoized(factorial);
+        console.log("Fact 3 ",factorial(3));
+        console.log("Fact 3 ",factorial(3));
+        console.log("Fact 3 ",factorial(3));
+    </script>
+</html>

@@ -1,0 +1,47 @@
+<html>
+    <script>
+
+       let arr = [100,21,13,-4,50];
+       //const adder = (a,b)=>c;
+        const sum = arr.reduce((a,b)=>{
+            console.log('A ',a , " B ",b);
+            return a+b;
+        },0);
+        console.log("Sum ",sum);
+
+        const min = arr.reduce((a,b)=> a>b?b:a);
+        console.log("Min ",min);
+
+        let objArr = [
+            {
+                name : "Mg Mg",
+                age : 16,
+                gender: "Male"
+            },
+            {
+                name : "Aung Aung",
+                age : 20,
+                gender: "Male"
+            },
+            {
+                name : "Ma Khin",
+                age : 18,
+                gender: "Female"
+            },
+            {
+                name : "Mya Mya",
+                age : 16,
+                gender: "Female"
+            },
+       ];
+       let names = objArr.reduce((a,b)=>{
+            return [...a,b.name]
+       },[]);
+       console.log("Name ",names);
+       let isMale = (obj)=>obj.gender=='Male';
+       let males = objArr.reduce( (a,b)=>{
+            return isMale(b)?[...a,b]:a;
+       },[]);
+       console.log('Male ',males);
+    </script>
+</html>

@@ -1,0 +1,34 @@
+<html>
+    <script>
+
+        const once =function (fn)
+        {
+            let done = false;
+            /*
+            if(done)
+            {
+                return undefined;
+            }
+            else
+            {
+                done = true;
+                return fn.apply(this,arguments);
+            }
+            */
+            return function () 
+            {
+                return done ? undefined : ((done = true), fn.apply(this, arguments))
+            } 
+       }
+       function confirmPayment(orderId)
+       {
+        console.log('ConfirmPayment ',orderId);
+       }
+       confirmPayment = once(confirmPayment);
+       confirmPayment('1');
+       confirmPayment('1');
+       confirmPayment('1');
+       let k = (console.log('Hello'),console.log('Another'),3);
+       console.log("K ",k);
+    </script>
+</html>

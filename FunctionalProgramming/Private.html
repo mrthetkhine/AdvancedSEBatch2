@@ -1,0 +1,38 @@
+<html>
+    <script>
+
+       class Human 
+       {
+            constructor(name,age)
+            {
+                this.name = name;
+                this.age = age;
+            }
+       };
+       let obj = new Human("Tk",38);
+       obj.age = 200;
+       console.log("Obj ",obj);
+
+       function Stack()
+       {
+        let items = [];
+        function push(ele)
+        {
+            items.push(ele);
+        }
+        function pop()
+        {
+            return items.pop();
+        }
+        return {
+            pop,
+            push
+        }
+       }
+       let s1 = Stack();
+       s1.push(10);
+       s1.push(20);
+       s1.items = [];
+       console.log("S1.pop ",s1.pop());
+    </script>
+</html>

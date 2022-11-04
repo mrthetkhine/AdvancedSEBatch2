@@ -1,0 +1,14 @@
+<html>
+    <script>
+
+        const unary = (fn) =>
+        fn.length === 1
+            ? fn
+            : (arg) => fn(arg)
+       let arr = ["1","2","3","4"];
+       let integers = arr.map(unary(parseInt));
+       console.log("Integers ",integers)
+
+       arr.map(unary(console.log));
+    </script>
+</html>

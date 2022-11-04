@@ -27,29 +27,18 @@
                 gender: "Female"
             },
        ];
-       let names = [];
-       for(let i=0;i< objArr.length;i++)
-       {
-            names.push(objArr[i].name);
-       }
-       console.log("Names ",names);
-       
-       names = objArr.map(obj=>obj.name);
-       console.log("Names ",names);
-
-       const not = function(fun)
-       {
-        return function(ele)
+       let group = objArr.reduce((grp,b)=>{
+        console.log("Grp ",grp, " b ",b);
+        if(!grp[b.gender])
         {
-            return !fun(ele);
+            grp[b.gender] = [b];
         }
-       }
-       const isFemale = (obj)=>obj.gender == 'Female';
-       const isMale = not(isFemale);
-       
-       let females = objArr.filter(isFemale)
-                            .reduce((a,b)=> a.age>b.age?a:b);
-                            //.map(obj=>obj.name);
-       console.log("Oldest female ",females);
+        else
+        {
+            grp[b.gender].push(b);
+        }
+        return grp;
+       },{});
+       console.log('Group ',group);
     </script>
 </html>
