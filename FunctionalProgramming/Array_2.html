@@ -1,0 +1,42 @@
+<html>
+    <script>
+
+        let objArr = [
+            {
+                name : "Mg Mg",
+                age : 16,
+                gender: "Male"
+            },
+            {
+                name : "Aung Aung",
+                age : 31,
+                gender: "Male"
+            },
+            {
+                name : "Ma Khin",
+                age : 18,
+                gender: "Female"
+            },
+            {
+                name : "Mya Khin",
+                age : 31,
+                gender: "Female"
+            },
+            {
+                name : "Mya Mya",
+                age : 16,
+                gender: "Female"
+            },
+       ];
+       const isOver30=(obj)=> obj.age >30;
+       const isMale = (obj) => obj.gender == "Male";
+
+       let result = objArr.map(obj=>{
+        return isOver30(obj)? 
+                (isMale(obj)? Object.assign(obj,{name : "U "+obj.name}):
+                Object.assign(obj,{name : "Daw "+obj.name}))
+                : obj;
+       });
+       console.log("Result ",result);
+    </script>
+</html>

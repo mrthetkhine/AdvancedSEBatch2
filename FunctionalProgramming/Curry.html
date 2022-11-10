@@ -1,0 +1,31 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+     
+      let double = (x)=>x*x;
+      function sum(a)
+      {
+        return function(b)
+        {
+            return a+b;
+        }
+      }
+   
+      /*
+      let step1 = sum2(10);
+      let step2 = step1(20);
+      console.log("Step 2 ",step2);
+      */
+      let add3= sum(3);
+      //console.log("Sum ",add3(5));
+      //console.log("Sum ",add3(6));
+      let func2 = R.compose(add3,double);
+      console.log("Func2 ",func2(2));
+
+      let sum2 = (a,b) => a + b;
+      let curryFunc = R.curry(sum2);
+      let addThree = curryFunc(3);
+      console.log("Curried version ",curryFunc);
+      console.log("sum2(3) ", addThree(5));
+    </script>
+</html>

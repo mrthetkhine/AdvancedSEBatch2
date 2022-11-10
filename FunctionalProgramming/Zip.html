@@ -1,0 +1,67 @@
+<html>
+    <script>
+
+let apressBooks = [
+        {
+                "id": 111,
+                "title": "C# 6.0",
+                "author": "ANDREW TROELSEN",
+                "rating": [4.7],
+                "reviews": [
+                    {
+                        good : 4 , excellent : 12
+                    },
+                    {
+                        good : 5 , excellent : 10
+                    },
+                ]
+        },
+        {
+                "id": 222,
+                "title": "Efficient Learning Machines",
+                "author": "Rahul Khanna",
+                "rating": [4.5],
+                "reviews": []
+        },
+        {
+                "id": 333,
+                "title": "Pro AngularJS",
+                "author": "Adam Freeman",
+                "rating": [4.0],
+                "reviews": [
+                    {
+                        good : 4 , excellent : 12
+                    },
+                    {
+                        good : 5 , excellent : 10
+                    },
+                    {
+                        good : 5 , excellent : 10
+                    },
+                ]
+        },
+        {
+                "id": 444,
+                "title": "Pro ASP.NET",
+                "author": "Adam Freeman",
+                "rating": [4.2],
+                "reviews": [{good : 14 , excellent : 12}]
+        },
+    ];    
+    const zip = (leftArr,rightArr,fn) => {
+        let index, results = [];
+        for(index = 0;index < Math.min(leftArr.length, rightArr.length);index++)
+            results.push(fn(leftArr[index],rightArr[index]));
+        return results;
+    }
+    let names = ["Jhon","Smith"];
+    let titles = ["Java","C#"];
+    function pair(a,b)
+    {
+        console.log("A ",a, " b ",b);
+        return [a,b];
+    }
+    let result = zip(names,titles,pair);
+    console.log("Result ",result);
+    </script>
+</html>

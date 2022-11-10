@@ -1,0 +1,17 @@
+<html>
+    <script>
+
+        let toLower = (str) => str.toLowerCase();
+        let toUpper = (str) => str.toUpperCase();
+        let appendHi = (str) => str + ' hi';
+        
+        //let process = (str) => toUpper(appendHi(str));
+
+        let compose = (func1,func2)=>(str)=> func1(func2(str));
+        let pipe = (func1,func2)=>(str)=> func2(func1(str));
+        let process = compose(toLower,appendHi);
+        process = pipe(appendHi,toLower);
+        let result = process('Hello');
+        console.log("ToUpper ",result);
+    </script>
+</html>

@@ -1,0 +1,18 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+     
+    const classyGreeting = (firstName, lastName) => "The name's " + lastName + ", " + firstName + " " + lastName
+    const yellGreeting = R.compose(R.toUpper, classyGreeting);
+    console.log(yellGreeting('James', 'Bond')); //=> "THE NAME'S BOND, JAMES BOND"
+
+    console.log(R.compose(Math.abs, 
+                            R.add(1), 
+                            R.multiply(2))(-4)); //=> 7
+                            
+    console.log(R.pipe(
+                    R.multiply(2),
+                    R.add(1), 
+                    Math.abs)(-4)); //=> 7                                                
+    </script>
+</html>
