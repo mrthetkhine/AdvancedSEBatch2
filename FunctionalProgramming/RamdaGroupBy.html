@@ -1,0 +1,52 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+       const students = [
+                {
+                    name: 'Abby', 
+                    score: 84,
+                    gender: 'Male',
+                },
+                {
+                    name: 'Eddy', 
+                    score: 58,
+                    gender: 'Fmale',
+                },
+                {
+                    name: 'Two', 
+                    score: 91,
+                    gender: 'Fmale'},
+                {
+                    name: 'Jack', 
+                    score: 69,
+                    gender: 'Male'
+                }];
+    //let gender = (obj)=> obj.gender;
+    let groupByGender = R.groupBy(R.prop('gender'));
+    
+    console.log("Group by gender ",groupByGender(students));
+
+    console.log('Prop gender ', R.prop('gender',students[0]));
+    let double = (x)=>x*x;
+    console.log("Map ",R.map(double, [1, 2, 3]));
+    const sortByFirstItem = R.sortBy(R.prop(0));
+    const pairs = [[-1, 1], [-2, 2], [-3, 3]];
+    console.log("Sort ",sortByFirstItem(pairs)); //=> [[-3, 3], [-2, 2], [-1, 1]]
+
+
+    let arr = [2,2,2,1,1,1,2,2,3];
+    let groupByElement = R.groupBy(R.identity);
+    let elemntGroup = groupByElement(arr);
+    console.log('Group by element ',elemntGroup);
+    let mapResult = R.map(ele=>[ele[0],ele.length],elemntGroup);
+    console.log("Map Result ",mapResult);
+    let mapArray = R.values(mapResult);
+    console.log("values ",mapArray);
+    let sortByCount =  R.sortBy(R.prop(1));     
+    let sortResult = sortByCount(mapArray);   
+    let reverse = R.reverse(sortResult) 
+    console.log('Sort result ',reverse); 
+    let result = R.take(2,reverse);
+    console.log("Result ",result);
+    </script>
+</html>

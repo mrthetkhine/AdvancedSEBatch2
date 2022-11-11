@@ -1,0 +1,37 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+       
+       var Monoid = {
+            mempty: function (m) { return m.__Monoid__.mempty; },
+            mappend: function (m) { return m.__Monoid__.mappend; },
+            mconcat: function (m) {
+                return function (array) {
+                    return array.reduceRight(
+                        function (a, b) { return Monoid.mappend(m)(b, a); },
+                        Monoid.mempty(m)
+                    );
+                };
+            }
+        }
+
+        String.__Monoid__ = {
+            mempty: "",
+            mappend: function (a, b) { return a + b; }
+        };
+
+        Number.__Monoid__ = {
+            mempty: 0,
+            mappend: function (a, b) { return a + b; }
+        };
+
+        Array.__Monoid__ = {
+            mempty: [],
+            mappend: function (a, b) { return a.concat(b); }
+        };
+
+        console.log(Monoid.mconcat(String)(["foo", "bar", "baz"])); // => "foobarbaz"
+        console.log(Monoid.mconcat(Number)([1, 2, 3])); // => 6
+        console.log(Monoid.mconcat(Array)([["a", "b"], ["c"], ["d", "e", "f"]])); // => ["a", "b", "c", "d", "e", "f"]
+    </script>
+</html>

@@ -1,0 +1,28 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+       
+
+    let arr = [2,2,2,1,1,1,2,2,3];
+    let groupByElement = R.groupBy(R.identity);
+    let pairNumberWithCount = R.map(ele=>[ele[0],ele.length]);
+    let sortByCount =  R.sortBy(R.prop(1));    
+    //let log = (x)=> (console.log(x),x);
+    let log = R.tap(console.log);
+    let topKFrequent = R.pipe(
+                                groupByElement,
+                                log,
+                                pairNumberWithCount,
+                                log,
+                                R.values,
+                                log,
+                                sortByCount,
+                                log,
+                                R.reverse,
+                                log,
+                                R.take(2)
+                            );
+    console.log("Top Frequenet ", topKFrequent(arr));
+   
+    </script>
+</html>
