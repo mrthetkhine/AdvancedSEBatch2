@@ -1,0 +1,19 @@
+<html>
+    <script>
+        
+        function div(a,b)
+        {
+            if(b == 0)
+            {
+                return Promise.reject('Division by zero')
+            }
+            return Promise.resolve(a/b);
+        }      
+        div(10,2).then(x=>x * 2)
+                .then(x=>x+2)
+                .then(x=>console.log('First one ',x));  
+        div(10,0).then(x=>x * 2,x=>console.log('Failure ',x))
+                //.process(x=>console.log('Sucess ',x), x=>console.log('Failure ',x))
+                
+    </script>
+</html>

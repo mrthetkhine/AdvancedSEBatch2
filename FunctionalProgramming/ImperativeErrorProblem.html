@@ -1,0 +1,31 @@
+<html>
+    <script>
+        
+        function someAsyncFun(a)
+        {
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    console.log('Code execute  ',a);
+                    if(a == 0)
+                    {
+                        reject("a is zero");
+                    }
+                    return resolve(a*2);
+                });
+            })
+            
+        }
+        /*
+        try
+        {
+            someAsyncFun(0);
+        }
+        catch(e)
+        {
+            console.log("Err ",e);
+        }
+        */
+       someAsyncFun(0).then(x=>console.log('Ok x ',x), err=>console.log('Error ',err))
+                
+    </script>
+</html>

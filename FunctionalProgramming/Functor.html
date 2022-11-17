@@ -1,0 +1,31 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+       
+       let Container = (x)=>({
+         map: function(fn)
+         {
+            return Container(fn(x));
+         },
+         value()
+         {
+            return x;
+         },
+         toString()
+         {
+            return `Container ${x}`;
+         }
+     });
+     Container.of = (x) =>{
+         return Container(x);
+     };
+     const inc = (value)=>value +1;
+     const double = (value) => value * 2;
+     let count = Container.of(2);
+     console.log("Count ",count.value());
+     let count2 = count.map(inc)
+                       .map(inc)
+                       .map(double);
+     console.log("Count2 ",count2.value());
+    </script>
+</html>

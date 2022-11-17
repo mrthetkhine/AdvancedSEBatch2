@@ -1,0 +1,33 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+       
+       let toUpper = (str)=>str.toUpperCase();
+       let appendHi = (str) => str.concat(' hi');
+
+       let newFun = R.pipe(appendHi,toUpper);
+       console.log('NewFun ',newFun(undefined));
+
+       let MayBe = (x)=>({
+         map: function(fn)
+         {
+             return this.isNothing()? MayBe(null): MayBe(fn(x));
+         },
+         value()
+         {
+             return x;
+         },
+         isNothing()
+         {
+             return x === null || x===undefined;
+         },
+         join(){
+            return this.isNothing() ? MayBe.of(null) : x;
+        }
+
+     });
+     MayBe.of = (x) =>{
+         return MayBe(x);
+     }
+    </script>
+</html>
