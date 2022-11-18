@@ -1,0 +1,27 @@
+<html>
+    <script>
+    // Identity monad
+    const Id = value => ({
+        // Functor mapping
+        // Preserve the wrapping for .map() by 
+        // passing the mapped value into the type
+        // lift:
+        map: f => Id.of(f(value)),
+        // Monad chaining
+        // Discard one level of wrapping
+        // by omitting the .of() type lift:
+        chain: f => f(value),
+        // Just a convenient way to inspect
+        // the values:
+        toString: () => `Id(${ value })`
+    });
+    // The type lift for this monad is just
+    // a reference to the factory.
+    Id.of = Id;
+
+    let id = Id.of(2);
+    let result = id.map(x=>x+1)
+                   .chain(x=>Id.of(x*2));
+    console.log("Result ",result.toString());
+    </script>
+</html>

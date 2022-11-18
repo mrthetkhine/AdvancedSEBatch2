@@ -1,0 +1,9 @@
+<html>
+    <script>
+     
+     const getSomething=() => Promise.resolve(1);
+     const inc = (x)=>x+1;
+     let result = getSomething()['then'](inc);
+     console.log('Result ',result['then'](console.log));
+    </script>
+</html>
