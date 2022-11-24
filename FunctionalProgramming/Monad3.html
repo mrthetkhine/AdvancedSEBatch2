@@ -1,0 +1,18 @@
+<html>
+    <script>
+    const appendHi = (str)=> [str +' Hi',`Append Hi called`];
+    const toUpper = (str)=>[ str.toUpperCase(), `To UpperCase called ${str}`]; 
+
+    const compose = (f,g) => x=> f(g(x));
+    
+    const composeDebuggable = (f, g) => (x) => {
+        const [result,log] = g(x),
+              [result2,log2 ] = f(result);
+        return [result2, log + log2];
+    };
+    const toUpperAppendHi = composeDebuggable(appendHi,toUpper);
+
+    let result = toUpperAppendHi('hello');
+    console.log("Result ",result);
+    </script>
+</html>

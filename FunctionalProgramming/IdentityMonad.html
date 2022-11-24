@@ -20,8 +20,8 @@
     Id.of = Id;
 
     let id = Id.of(2);
-    let result = id.map(x=>x+1)
-                   .chain(x=>Id.of(x*2));
+    let result = id.map(x=>x+1) //Monad
+                   .chain(x=>Id.of(x*2)); //if map -> Monad(Monad())
     console.log("Result ",result.toString());
     </script>
 </html>

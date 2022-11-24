@@ -1,0 +1,30 @@
+<html>
+    <script>
+    const appendHi = (str)=> [str +' Hi',`Append Hi called`];
+    const toUpper = (str)=>[ str.toUpperCase(), `To UpperCase called ${str}`]; 
+    
+    const compose = (f,g) => x=> f(g(x));    
+    
+    const bind = (f) => function(tuple) {
+        const [x, s] = tuple,
+              [y, t] = f(x);
+        return [y, s + t];
+    };
+    const toUpperAppendHi = compose(bind(appendHi), bind(toUpper));
+    console.log('ToUpperAppendHi ',toUpperAppendHi(['hello','']));
+
+    const unit = (x) => [x, ''];
+    const newFun = compose(toUpperAppendHi,unit);//unit-> x->[] ->toUpperAppendHi []->[]
+    console.log('newFun ',newFun('hello'));
+
+    const prependMorning = (str)=> "Morning "+str;
+    const prependMorningDebug =(x)=>unit(prependMorning(x));
+    console.log("Prepend Morning ", prependMorningDebug('hi'));
+
+    const lift = (f) => compose(unit, f);
+    const prependDebug = lift(prependMorning);
+    console.log("Prepend Morning ", prependDebug('hi'));
+
+    console.log("ToUpperAppendHi ",toUpperAppendHi(unit('hello')));
+    </script>
+</html>
