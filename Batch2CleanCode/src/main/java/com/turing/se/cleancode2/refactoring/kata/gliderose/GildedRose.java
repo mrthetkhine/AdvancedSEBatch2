@@ -7,6 +7,8 @@ public class GildedRose {
 	private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 	private static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
 	private static final String AGED_BRIE = "Aged Brie";
+	
+
 	Item[] items;
 
     public GildedRose(Item[] items) {
@@ -15,88 +17,117 @@ public class GildedRose {
 
     public void update() {
         for (Item item : items) {
+        	NormalItem normalItem = ItemFactory.getItem(item);
         	
-        	String itemName = item.name;
-        	//Update quality
-        	//Not Aged brie && not Backstage passes to a TAFKAL80ETC concert && not "Sulfuras, Hand of Ragnaros"
-        	//we will reduce item quality.
-            if (!itemName.equals(AGED_BRIE)
-                    && !itemName.equals(BACKSTAGE)) 
-            {
-            	//impose lower limit
-                if (item.quality > QTY_LOWER_LIMIT) 
-                {
-                    if (!itemName.equals(SULFURAS)) 
-                    {
-                        item.quality = item.quality - 1;
-                    }
-                }
-            } 
-            else 
-            {
-            	//it is "Aged Brie" && "Backstage passes to a TAFKAL80ETC"
-            	//expose upper limit
-                updateQualityForAgeBrieAndBackStage(item);
-            }
-
-            updateSellIn(item);
-
-            //pass sell in date 
-            if (item.sellIn < SELL_IN_LOWER_LIMIT) {
-                if (!itemName.equals(AGED_BRIE)) {
-                    if (!itemName.equals(BACKSTAGE)) 
-                    {
-                        if (item.quality > QTY_LOWER_LIMIT) {
-                            if (!itemName.equals(SULFURAS)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } 
-                    //Backstage Quality drops to 0 after the concert
-                    else 
-                    {
-                        item.quality = 0;
-                    }
-                } 
-                //Age brie increase quality if sell in date pass
-                else 
-                {
-                    if (item.quality < QTY_UPPER_LIMIT) {
-                        item.quality = item.quality + 1;
-                    }
-                }
-            }
+        	normalItem.update();
+        	normalItem.setItemData(item);
+        	
         }
     }
+    
 
-	private void updateQualityForAgeBrieAndBackStage(Item item) {
+    /*
+	private void updateQualityBeforeSellIn(Item item) {
 		String itemName = item.name;
-		if (item.quality < QTY_UPPER_LIMIT) 
+		if(itemName.equals(AGED_BRIE) )
 		{
-		    item.quality = item.quality + 1;
-
-		    if (itemName.equals(BACKSTAGE)) 
+			updateQualityForAgeBrie(item);
+		}
+		else if(itemName.equals(BACKSTAGE))
+		{
+			 updateQualityForBackStage(item);
+		}
+		else if(itemName.equals(SULFURAS))
+		{
+			//do nothing for SULFURAS
+		}
+		else 
+		{
+			//impose lower limit
+		    if (isQualityHigherThanLowerLimit(item)) 
 		    {
-		    	// sell in is 10 day or less
-		        if (item.sellIn < 11) 
-		        {
-		            if (item.quality < QTY_UPPER_LIMIT) 
-		            {
-		                item.quality = item.quality + 1;
-		            }
-		        }
-		        //5 day or less
-		        //
-		        if (item.sellIn < 6) 
-		        {
-		            if (item.quality < QTY_UPPER_LIMIT) 
-		            {
-		            	//this will be increased by 3 now.
-		                item.quality = item.quality + 1;
-		            }
-		        }
+		    	item.quality = item.quality - 1;
 		    }
 		}
+	}
+
+	private boolean isSellInLowerThanLimit(Item item) {
+		return item.sellIn < SELL_IN_LOWER_LIMIT;
+	}
+
+	private boolean isQualityHigherThanLowerLimit(Item item) {
+		return item.quality > QTY_LOWER_LIMIT;
+	}
+
+	private void updateAfterSellInDate(Item item) {
+		String itemName = item.name;
+		
+		 if (isSellInLowerThanLimit(item)) {
+			 if(itemName.equals(AGED_BRIE))
+			 {
+				 if (isQualityUnderUpperLimit(item)) 
+				 {
+				    item.quality = item.quality + 1;
+				 }
+			 }
+			 else if(itemName.equals(BACKSTAGE))
+			 {
+				 item.quality = 0;
+			 }
+			 else if(itemName.equals(SULFURAS))
+			 {
+				 //Do nothing;
+			 }
+			 else
+			 {
+				 if (isQualityHigherThanLowerLimit(item)) 
+				 {
+					 item.quality = item.quality - 1;
+			     }
+				   
+			} 
+				
+		 }
+		
+	}
+	void updateQualityForAgeBrie(Item item)
+	{
+		if(this.isQualityUnderUpperLimit(item))
+		{
+			item.quality = item.quality + 1;
+		}
+		
+	}
+
+
+	private void updateQualityForBackStage(Item item) {
+		if(this.isQualityUnderUpperLimit(item))
+		{
+			item.quality = item.quality + 1;
+			// sell in is 10 day or less
+			if (item.sellIn < 11) 
+			{
+			    if (isQualityUnderUpperLimit(item)) 
+			    {
+			        item.quality = item.quality + 1;
+			    }
+			}
+			//5 day or less
+			//
+			if (item.sellIn < 6) 
+			{
+			    if (isQualityUnderUpperLimit(item)) 
+			    {
+			    	//this will be increased by 3 now.
+			        item.quality = item.quality + 1;
+			    }
+			}
+		}
+		
+	}
+
+	private boolean isQualityUnderUpperLimit(Item item) {
+		return item.quality < QTY_UPPER_LIMIT;
 	}
 
 	private void updateSellIn(Item item) {
@@ -106,6 +137,7 @@ public class GildedRose {
 		    item.sellIn = item.sellIn - 1;
 		}
 	}
+	*/
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
