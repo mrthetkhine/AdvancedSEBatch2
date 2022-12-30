@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
+	private static final String CUSTOM_DELIMITER_PREFIX = "//[";
+	private static final String CSUTOM_DELIMITER_REG = "\\[[^\\]]+\\]";
 	private static final int UPPER_LIMIT = 1000;
 	private static final int LOWER_LIMIT = 0;
 	public static final String NEGATIVES_NOT_ALLOWED = "negatives not allowed";
@@ -25,45 +27,48 @@ public class Calculator {
 			return sumMultipleString(input);
 		}
 						
-		
 	}
 
 	private int sumWithCustomDelimiter(String input) {
-		System.out.println("Input "+input.startsWith("//["));
-		if(input.startsWith("//["))
+		if(input.startsWith(CUSTOM_DELIMITER_PREFIX))
 		{
-			//System.out.println("Here");
-			String delimiterReg = "\\[(.+)\\]";
-			Pattern pattern = Pattern.compile(delimiterReg);
-			Matcher matcher = pattern.matcher(input);
-			
-			
-			if(matcher.find())
-			{
-				String delimiter = matcher.group(1);
-				System.out.println("Delimiter>> "+delimiter);
-				CharSequence charSeq = delimiter;
-				CharSequence comma = ",";
-				String inputAfterDeilimiter = input.replace(charSeq, comma);
-				System.out.println("inputAfterDeilimiter "+inputAfterDeilimiter);
-				return sumMultipleString(inputAfterDeilimiter);
-			}
-			else
-			{
-				return sumMultipleString(input);
-			}
+			return sumWithMultipleCharDelimiter(input);
 		}
 		else
 		{
-			char customDelimiter = input.charAt(CUSTOM_DELIMITER_ESCAPE.length()); 
-			
-			int delimiterAndNewLine = 2;
-			String inputAfterDeilimiter = input.substring(CUSTOM_DELIMITER_ESCAPE.length()+delimiterAndNewLine);
-			inputAfterDeilimiter = inputAfterDeilimiter.replace(customDelimiter, ',');
-			
-			return sumMultipleString(inputAfterDeilimiter);
+			return sumWithSingleCharDelimiter(input);
 		}
 		
+	}
+
+	private int sumWithSingleCharDelimiter(String input) {
+		char customDelimiter = input.charAt(CUSTOM_DELIMITER_ESCAPE.length()); 
+		
+		int delimiterAndNewLine = 2;
+		String inputAfterDeilimiter = input.substring(CUSTOM_DELIMITER_ESCAPE.length()+delimiterAndNewLine);
+		inputAfterDeilimiter = inputAfterDeilimiter.replace(customDelimiter, ',');
+		
+		return sumMultipleString(inputAfterDeilimiter);
+	}
+
+	private int sumWithMultipleCharDelimiter(String input) {
+		
+		Pattern pattern = Pattern.compile(CSUTOM_DELIMITER_REG);
+		Matcher matcher = pattern.matcher(input);
+		
+		int indexOfNewLine = input.indexOf("\n"); 
+		String data = input.substring( indexOfNewLine+1);
+		
+		while(matcher.find())
+		{
+			String delimiterGroup = matcher.group();
+			
+			String delimiter = delimiterGroup.substring(1,delimiterGroup.length()-1);
+			String comma = ",";
+			data = data.replaceAll(Pattern.quote(delimiter), comma);
+			
+		}
+		return sumMultipleString(data);
 	}
 
 	private int sumMultipleString(String input) {
@@ -91,6 +96,5 @@ public class Calculator {
 		}
 		return number;
 	}
-	
 
 }

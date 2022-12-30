@@ -19,7 +19,7 @@ public class StringCalculatorTest {
 
 	Calculator cal = new Calculator();
 	
-	/*
+	
 	@Test
 	public void testEmptyStringShouldReturnZero()
 	{
@@ -98,13 +98,15 @@ public class StringCalculatorTest {
 		int result = cal.add(input);
 		assertEquals(3, result);
 	}
-	*/
+	
+	
 	static Stream<Arguments> inputWithMulipleLengthDelimiterProvider() {
 	       return Stream.of(
 	               arguments("//[***]\n1***2***3", 6)
 	             
 	       );
 	}
+	
 	@ParameterizedTest
 	@MethodSource("inputWithMulipleLengthDelimiterProvider")
 	public void testWithMultipleLengthDelimiter(String input,int expectedResult)
@@ -113,28 +115,22 @@ public class StringCalculatorTest {
 		
 		assertEquals(expectedResult, result,"Excepted "+expectedResult+" but got "+ result);
 	}
-	@Test
-	public void testReg()
-	{
-		
-		String input = "//[***]\n1***2***3";
-		/*
-		String delimiterReg = "\\[(.+)\\]";
-		Pattern pattern = Pattern.compile(delimiterReg);
-		Matcher matcher = pattern.matcher(input);
-		
-		while (matcher.find()) {
-            System.out.format("Text \"%s\" found at %d to %d.%n",
-                    matcher.group(1), matcher.start(), matcher.end());
-            
-            //String delimieter = input.substring(matcher.start(),matcher.end());
-            System.out.println("Delimiter "+matcher.group(1));
-        }
-        */
-		
-		CharSequence  delimiter ="***";
-		CharSequence comma = ",";
-		String result = input.replace(delimiter, comma);
-		System.out.println("Result "+result);
+	
+	static Stream<Arguments> inputWithMulipleDelimiterProvider() {
+	       return Stream.of(
+	               arguments("//[*][%]\n1*2%3", 6),
+	               arguments("//[**][%]\n1**2%3", 6),
+	               arguments("//[*(][%]\n1*(2%3", 6)
+	             
+	       );
 	}
+	@ParameterizedTest
+	@MethodSource("inputWithMulipleDelimiterProvider")
+	public void testWithMulipleDelimiterProvider(String input,int expectedResult)
+	{
+		int result = cal.add(input);
+		
+		assertEquals(expectedResult, result,"Excepted "+expectedResult+" but got "+ result);
+	}
+	
 }
