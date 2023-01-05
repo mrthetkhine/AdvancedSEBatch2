@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@types/node-fetch": "^2.6.2",
+    "funfix": "^7.0.1",
+    "node-fetch": "^2.6.7",
+    "ramda": "^0.28.0",
+    "rxjs": "^7.6.0"
+  }
+}

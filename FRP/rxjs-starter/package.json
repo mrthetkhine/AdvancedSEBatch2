@@ -1,0 +1,17 @@
+{
+  "name": "rxjs-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sample.js",
+  "dependencies": {
+    "parcel-bundler": "^1.12.3",
+    "rxjs":  "^7.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "Brian Troncone",
+  "license": "MIT"
+}
